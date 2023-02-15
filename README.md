@@ -1,7 +1,7 @@
 NCurses-Demo
 ============
 
-Minimalbeispiel für ein [ncurses](https://en.wikipedia.org/wiki/Ncurses)-Programm als Vorlage für studentische Projekte im Modul *Programmierung mit C++*
+Minimalbeispiel für ein [Curses](https://en.wikipedia.org/wiki/Ncurses)-Programm als Vorlage für studentische Projekte im Modul *Programmierung mit C++*
 
 Die Curses-Bibliothek dient dem Realisieren von zeichenorientierten Benutzerschnittstellen. Sie eignet sich gut für interaktive Programme und einfache Spiele. Ein Klassiker, der mit Curses implementiert wurde, ist das Spiel [Rogue](https://de.wikipedia.org/wiki/Rogue_(Computerspiel)).
 
@@ -89,7 +89,7 @@ Konfiguration der Entwicklungsumgebung
 2. Dann bei *C Compiler Options* eintragen: `-lncurses`
 3. Projekt wie gewohnt kompilieren
 
-**Visual Studio Code** (mit *Code Runner* Erweiterungen)
+**Visual Studio Code** (mit *Code Runner*-Erweiterung)
 
 1. Datei > Einstellungen > Erweiterungen
 2. Links in der Navigation: Code Runner Einstellungen (Zahnrad) > Erweiterungseinstellungen
