@@ -1,14 +1,22 @@
 NCurses-Demo
 ============
 
-Minimalbeispiel für ein [ncurses](https://en.wikipedia.org/wiki/Ncurses)-Programm als Vorlage für studentische Projekte im Modul *Programmierung mit C++*.
+Minimalbeispiel für ein [ncurses](https://en.wikipedia.org/wiki/Ncurses)-Programm als Vorlage für studentische Projekte im Modul *Programmierung mit C++*
+
+Die Curses-Bibliothek dient dem Realisieren von zeichenorientierten Benutzerschnittstellen. Sie eignet sich gut für interaktive Programme und einfache Spiele. Ein Klassiker, der mit Curses implementiert wurde, ist das Spiel [Rogue](https://de.wikipedia.org/wiki/Rogue_(Computerspiel)).
 
 Installation
 ------------
 
+**Curses installieren**
+
 ```bash
 sudo apt-get install libncurses-dev
-# Kompilieren und Ausführen:
+```
+
+**Kompilieren und Ausführen**
+
+```bash
 gcc hello_curses.c -lncurses -o hello_curses
 ./hello_curses
 ```
@@ -16,64 +24,79 @@ gcc hello_curses.c -lncurses -o hello_curses
 Grundlegende Funktionen
 -----------------------
 
-**Ausgabe an definierter Position:**
+**Ausgabe an definierter Position**
 
 ```c
 mvaddch(int row, int col, char c);     // Einzelzeichen
 mvaddstr(int row, int col, char *str); // Zeichenkette
-mvprintw(int row, int col, ...);       // identisch mit C's printf()
+mvprintw(int row, int col, ...);       // wie C's printf()
 ```
 
-**Ausgabe an aktueller Cursorposition:**
+**Benutzereingaben**
 
 ```c
-addch(char c);     // Einzelzeichen
-addstr(char *str); // Zeichenkette
-printw(...);       // identisch mit C's printf()
-```
-
-**Versetzen des Cursors:**
-
-```c
-move(int row, int col);
-```
-
-**Eingabe:**
-
-```c
-char getch(void);                // einzelnes Zeichen, ohne enter druecken zu muessen
+char getch(void);                // einzelnes Zeichen (kein Enter noetig)
 char* getstr(char *str);         // Zeichenkette
 char* getnstr(char *str, int n); // Zeichenkette mit n Zeichen
-scanw(...);                      // identisch mit C's scanf()
+scanw(...);                      // wie C's scanf()
 ```
 
-**Fensterinhalt:**
+**Fensterinhalt**
 
 ```c
-refresh();            // Fensterinhalt aktualisieren
-erase(); und clear(); // gesamten Fensterinhalt leeren
-clrtoeol();           // von Cursor bis Zeilenende (clear to end of line)
-clrtobot();           // von Cursor bis Ende des Fensters (clear to bottom of window)
+erase();   // gesamten Fensterinhalt leeren
+refresh(); // Fensterinhalt aktualisieren
 ```
 
-**Ermitteln der Fenstergröße:**
+Damit lassen sich die allermeisten Aufgaben bereits bewerkstelligen.
+
+Weitere Funktionen
+------------------
+
+**Ermitteln der Fenstergröße**
 
 ```c
 int maxrow, maxcol;
 getmaxyx(stdscr, maxrow, maxcol);
 ```
 
-Konfiguration der IDE
----------------------
+**Ausgabe an aktueller Cursorposition**
 
-**CodeBlocks:**
+```c
+addch(char c);     // Einzelzeichen
+addstr(char *str); // Zeichenkette
+printw(...);       // wie C's printf()
+```
+
+**Versetzen des Cursors**
+
+```c
+move(int row, int col);
+```
+
+Konfiguration der Entwicklungsumgebung
+--------------------------------------
+
+**CodeBlocks**
 
 1. Settings > Compiler > Linker settings
 2. Dann bei *Other linker options* eintragen: `-lncurses`
 3. Projekt wie gewohnt kompilieren
 
-**Atom:**
+**Atom**
 
 1. Edit > Preferences > Packages > gpp-compiler > Settings
 2. Dann bei *C Compiler Options* eintragen: `-lncurses`
 3. Projekt wie gewohnt kompilieren
+
+**Visual Studio Code** (mit *Code Runner* Erweiterungen)
+
+1. Datei > Einstellungen > Erweiterungen
+2. Links in der Navigation: Code Runner Einstellungen (Zahnrad) > Erweiterungseinstellungen
+3. Haken setzen bei *Run In Terminal*
+4. Bei *Executor Map* auf *In settings.json bearbeiten* gehen
+5. Die Curses-Library (`-lncurses`) hinzufügen:
+   - aus `"c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",`  
+     wird `"c": "cd $dir && gcc $fileName -lncurses -o $fileNameWithoutExt && $dir$fileNameWithoutExt",`
+   - aus `"cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",`  
+     wird  `"cpp": "cd $dir && g++ $fileName -lncurses -o $fileNameWithoutExt && $dir$fileNameWithoutExt",`
